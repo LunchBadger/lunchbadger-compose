@@ -19,7 +19,7 @@ class PrivateQuadrant extends Component {
         case 'Model':
           return <Model key={entity.id} icon="fa-car" entity={entity}/>;
         case 'PrivateEndpoint':
-          return <PrivateEndpoint key={entity.id} icon="fa-user-secret" entity={entity}/>;
+          return <PrivateEndpoint graph={this.props.graph} key={entity.id} icon="fa-user-secret" entity={entity}/>;
       }
 
     })
