@@ -1,20 +1,14 @@
 import React, {Component, PropTypes} from 'react';
-import Sortable from 'react-sortablejs';
 import QuadrantResizeHandle from './QuadrantResizeHandle';
 import './Quadrant.scss';
 
-const sortableOptions = {
-  ref: 'list',
-  model: 'entities'
-};
-
 export default (ComposedComponent) => {
-  class Quadrant extends Component {
+  return class Quadrant extends Component {
     static propTypes = {
       title: PropTypes.string.isRequired,
-      sortableInstance: React.PropTypes.object,
       resizable: PropTypes.bool,
-      data: PropTypes.object.isRequired
+      data: PropTypes.object.isRequired,
+      canvas: PropTypes.object.isRequired
     };
 
     constructor(props) {
@@ -56,7 +50,7 @@ export default (ComposedComponent) => {
         <div className="quadrant" ref="quadrant" style={{width: this.state.quadrantWidth}}>
           <div className="quadrant__title">{this.props.title}</div>
           <div className="quadrant__body">
-            <ComposedComponent {...this.props} ref="list" entities={this.state.entities}/>
+            <ComposedComponent {...this.props} entities={this.state.entities}/>
           </div>
           {(() => {
             if (this.props.resizable) {
@@ -67,6 +61,4 @@ export default (ComposedComponent) => {
       );
     }
   }
-
-  return Sortable(sortableOptions)(Quadrant);
 }
