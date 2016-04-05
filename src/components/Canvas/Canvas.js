@@ -9,7 +9,7 @@ import Gateway from '../../stores/Gateway';
 import Backend from '../../stores/Backend';
 import './Canvas.scss';
 import joint from 'jointjs';
-import '../../joint-elements/library';
+import '../../joint-elements';
 import {findDOMNode} from 'react-dom';
 
 export default class Canvas extends Component {
