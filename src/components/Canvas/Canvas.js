@@ -9,6 +9,7 @@ import Gateway from '../../stores/Gateway';
 import Backend from '../../stores/Backend';
 import './Canvas.scss';
 import joint from 'jointjs';
+import '../../joint-elements/library';
 import {findDOMNode} from 'react-dom';
 
 export default class Canvas extends Component {
@@ -41,10 +42,10 @@ export default class Canvas extends Component {
           </div>
 
           <div className="canvas__container" ref="canvas">
-            <BackendQuadrant data={Backend} canvas={this.graph} resizable title="Backend"/>
-            <PrivateQuadrant data={Private} canvas={this.graph} resizable title="Private"/>
-            <GatewaysQuadrant data={Gateway} canvas={this.graph} resizable title="Gateways"/>
-            <PublicQuadrant data={Public} canvas={this.graph} title="Public"/>
+            <BackendQuadrant data={Backend} graph={this.graph} resizable title="Backend"/>
+            <PrivateQuadrant data={Private} graph={this.graph} resizable title="Private"/>
+            <GatewaysQuadrant data={Gateway} graph={this.graph} resizable title="Gateways"/>
+            <PublicQuadrant data={Public} graph={this.graph} title="Public"/>
           </div>
         </div>
       </section>

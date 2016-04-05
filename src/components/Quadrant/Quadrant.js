@@ -8,7 +8,7 @@ export default (ComposedComponent) => {
       title: PropTypes.string.isRequired,
       resizable: PropTypes.bool,
       data: PropTypes.object.isRequired,
-      canvas: PropTypes.object.isRequired
+      graph: PropTypes.object.isRequired
     };
 
     constructor(props) {
