@@ -1,6 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import QuadrantResizeHandle from './QuadrantResizeHandle';
 import './Quadrant.scss';
+import joint from 'jointjs';
+
+const asideWidth = 60;
 
 export default (ComposedComponent) => {
   return class Quadrant extends Component {
@@ -27,9 +30,33 @@ export default (ComposedComponent) => {
     }
 
     componentDidMount() {
+      const quadrant = this.refs.quadrant;
+      const quadrantBounds = quadrant.getBoundingClientRect();
+
       if (this.props.data) {
         this.props.data.addChangeListener(this.onStoreChange);
       }
+
+      const quadrantElement = new joint.shapes.lunchBadger.Quadrant({
+        position: {
+          x: quadrantBounds.left - asideWidth,
+          y: 0
+        },
+        size: {
+          width: quadrantBounds.width,
+          height: quadrantBounds.height
+        },
+        attrs: {
+          rect: {
+            width: quadrantBounds.width,
+            height: quadrantBounds.height
+          }
+        }
+      });
+
+      setTimeout(() => {
+        this.props.graph.addCell(quadrantElement);
+      });
     }
 
     componentWillUnmount() {

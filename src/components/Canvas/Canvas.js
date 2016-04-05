@@ -30,23 +30,8 @@ export default class Canvas extends Component {
       model: this.graph,
       gridSize: 1
     });
-    const Quadrant = new joint.shapes.lunchBadger.Quadrant();
-    this.graph.addCell(Quadrant);
-    /*var r1 = new joint.shapes.basic.Rect({
-      position: { x: 20, y: 20 },
-      size: { width: 200, height: 200 },
-      attrs: { rect: { fill: '#E74C3C' }, text: { text: 'Parent' } }
-    });
-    var r2 = new joint.shapes.basic.Rect({
-      position: { x: 70, y: 30 },
-      size: { width: 100, height: 80 },
-      attrs: { rect: { fill: '#F1C40F' }, text: { text: 'Child' } }
-    });
 
-    r1.embed(r2);
-    this.graph.addCells([r1, r2]);*/
     this.graph.on('change:position', (cell) => {
-
       var parentId = cell.get('parent');
       if (!parentId) return;
 
@@ -58,13 +43,9 @@ export default class Canvas extends Component {
         parentBbox.containsPoint(cellBbox.topRight()) &&
         parentBbox.containsPoint(cellBbox.corner()) &&
         parentBbox.containsPoint(cellBbox.bottomLeft())) {
-
-        // All the four corners of the child are inside
-        // the parent area.
         return;
       }
-
-      // Revert the child position.
+      
       cell.set('position', cell.previous('position'));
     });
   }

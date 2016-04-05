@@ -6,7 +6,8 @@ export default joint.dia.Element.extend({
     type: 'lunchBadger.Quadrant',
     size: {width: 300, height: 1000},
     attrs: {
-      'rect': {width: 300, height: 1000}
+      'rect': {width: 300, height: 1000, fill: 'transparent'},
+      '.': {'pointer-events': 'none'}
     }
   }, joint.dia.Element.prototype.defaults)
 });
