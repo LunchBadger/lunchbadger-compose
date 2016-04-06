@@ -1,20 +1,16 @@
 import React, {Component, PropTypes} from 'react';
-import Sortable from 'react-sortablejs';
 import QuadrantResizeHandle from './QuadrantResizeHandle';
 import './Quadrant.scss';
-
-const sortableOptions = {
-  ref: 'list',
-  model: 'entities'
-};
+import _ from 'lodash';
 
 export default (ComposedComponent) => {
-  class Quadrant extends Component {
+  return class Quadrant extends Component {
     static propTypes = {
       title: PropTypes.string.isRequired,
-      sortableInstance: React.PropTypes.object,
       resizable: PropTypes.bool,
-      data: PropTypes.object.isRequired
+      data: PropTypes.object.isRequired,
+      graph: PropTypes.object.isRequired,
+      onResizeEnd: PropTypes.func
     };
 
     constructor(props) {
@@ -33,6 +29,9 @@ export default (ComposedComponent) => {
     }
 
     componentDidMount() {
+      this.quadrant = this.refs.quadrant;
+      this.quadrantBounds = this.quadrant.getBoundingClientRect();
+
       if (this.props.data) {
         this.props.data.addChangeListener(this.onStoreChange);
       }
@@ -45,8 +44,8 @@ export default (ComposedComponent) => {
     }
 
     recalculateQuadrantWidth(event) {
-      const quadrantBounds = this.refs.quadrant.getBoundingClientRect();
-      const newWidth = event.clientX - quadrantBounds.left;
+      this.quadrantBounds = this.quadrant.getBoundingClientRect();
+      const newWidth = event.clientX - this.quadrantBounds.left;
 
       this.setState({quadrantWidth: `${newWidth}px`});
     }
@@ -56,17 +55,19 @@ export default (ComposedComponent) => {
         <div className="quadrant" ref="quadrant" style={{width: this.state.quadrantWidth}}>
           <div className="quadrant__title">{this.props.title}</div>
           <div className="quadrant__body">
-            <ComposedComponent {...this.props} ref="list" entities={this.state.entities}/>
+            <ComposedComponent {...this.props} entities={this.state.entities}/>
           </div>
           {(() => {
             if (this.props.resizable) {
-              return <QuadrantResizeHandle onDrag={this.recalculateQuadrantWidth.bind(this)}/>;
+              return (
+                <QuadrantResizeHandle
+                  onDragEnd={() => _.isFunction(this.props.onResizeEnd) && this.props.onResizeEnd(this.quadrantBounds)}
+                  onDrag={this.recalculateQuadrantWidth.bind(this)}/>
+              );
             }
           })()}
         </div>
       );
     }
   }
-
-  return Sortable(sortableOptions)(Quadrant);
 }

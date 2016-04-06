@@ -3,6 +3,8 @@ import Quadrant from './Quadrant';
 import PrivateEndpoint from '../CanvasElements/PrivateEndpoint';
 import Model from '../CanvasElements/Model';
 
+export const groupName = 'Private';
+
 class PrivateQuadrant extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
@@ -19,7 +21,7 @@ class PrivateQuadrant extends Component {
         case 'Model':
           return <Model key={entity.id} icon="fa-car" entity={entity}/>;
         case 'PrivateEndpoint':
-          return <PrivateEndpoint key={entity.id} icon="fa-user-secret" entity={entity}/>;
+          return <PrivateEndpoint graph={this.props.graph} key={entity.id} icon="fa-user-secret" entity={entity}/>;
       }
 
     })

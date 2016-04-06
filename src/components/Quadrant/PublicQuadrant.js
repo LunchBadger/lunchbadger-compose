@@ -3,6 +3,8 @@ import Quadrant from './Quadrant';
 import PublicEndpoint from '../CanvasElements/PublicEndpoint';
 import Product from '../CanvasElements/Product';
 
+export const groupName = 'Public';
+
 class PublicQuadrant extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
