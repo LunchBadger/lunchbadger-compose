@@ -30,11 +30,12 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
+      rappid: `${defaultSettings.srcPath}/../vendor/rappid/rappid.js`,
       actions: `${defaultSettings.srcPath}/actions/`,
       components: `${defaultSettings.srcPath}/components/`,
-      sources: `${defaultSettings.srcPath}/sources/`,
+      dispatcher: `${defaultSettings.srcPath}/dispatcher/`,
+      models: `${defaultSettings.srcPath}/models/`,
       stores: `${defaultSettings.srcPath}/stores/`,
-      styles: `${defaultSettings.srcPath}/styles/`,
       config: `${defaultSettings.srcPath}/config/` + process.env.REACT_WEBPACK_ENV
     }
   },
