@@ -3,6 +3,8 @@ import Quadrant from './Quadrant';
 import PrivateEndpoint from '../CanvasElements/PrivateEndpoint';
 import Model from '../CanvasElements/Model';
 
+export const groupName = 'Private';
+
 class PrivateQuadrant extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,

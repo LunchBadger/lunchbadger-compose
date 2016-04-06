@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import Quadrant from './Quadrant';
 import DataSource from '../CanvasElements/DataSource';
 
+export const groupName = 'Backend';
+
 class BackendQuadrant extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,

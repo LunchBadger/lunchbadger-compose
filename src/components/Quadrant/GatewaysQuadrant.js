@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import Quadrant from './Quadrant';
 import Gateway from '../CanvasElements/Gateway';
 
+export const groupName = 'Gateways';
+
 class GatewaysQuadrant extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
