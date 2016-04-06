@@ -19,6 +19,7 @@
 			border-bottom-right-radius: 0;
 		}
 	}
+  &.active,
 	&:hover {
 		overflow: visible;
 		background: lighten($ui-base, 5%);
