@@ -8,7 +8,7 @@ import Public from '../../stores/Public';
 import Gateway from '../../stores/Gateway';
 import Backend from '../../stores/Backend';
 import './Canvas.scss';
-import joint from 'jointjs';
+import joint from 'rappid';
 import '../../joint-elements';
 import {findDOMNode} from 'react-dom';
 

@@ -1,4 +1,4 @@
-import joint from 'jointjs';
+import joint from 'rappid';
 import jointQuadrant from './Quadrant';
 import jointPrivateEndpoint from './PrivateEndpoint';
 

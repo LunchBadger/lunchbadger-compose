@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import QuadrantResizeHandle from './QuadrantResizeHandle';
 import './Quadrant.scss';
-import joint from 'jointjs';
+import joint from 'rappid';
 
 const asideWidth = 60;
 

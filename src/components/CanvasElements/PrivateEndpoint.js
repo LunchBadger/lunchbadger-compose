@@ -3,7 +3,7 @@ import CanvasElement from './CanvasElement';
 import Port from './Port';
 import './CanvasElement.scss';
 import updatePrivateEndpoint from '../../actions/PrivateEndpoint/update';
-import joint from 'jointjs';
+import joint from 'rappid';
 class PrivateEndpoint extends Component {
   static propTypes = {
     entity: PropTypes.object.isRequired

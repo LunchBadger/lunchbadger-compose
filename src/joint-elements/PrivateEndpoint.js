@@ -1,4 +1,4 @@
-import joint from 'jointjs';
+import joint from 'rappid';
 
 export default joint.dia.Element.extend({
   markup: '<rect class="card"/>',
