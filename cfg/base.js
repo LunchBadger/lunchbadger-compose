@@ -35,6 +35,7 @@ module.exports = {
       components: `${defaultSettings.srcPath}/components/`,
       dispatcher: `${defaultSettings.srcPath}/dispatcher/`,
       models: `${defaultSettings.srcPath}/models/`,
+      helpers: `${defaultSettings.srcPath}/helpers/`,
       stores: `${defaultSettings.srcPath}/stores/`,
       config: `${defaultSettings.srcPath}/config/` + process.env.REACT_WEBPACK_ENV
     }
