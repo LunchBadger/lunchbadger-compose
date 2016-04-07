@@ -5,6 +5,7 @@ import Gateway from '../tools/Gateway';
 import DataSource from '../tools/DataSource';
 import Model from '../tools/Model';
 import Product from '../tools/Product';
+import Pan from '../tools/Pan';
 
 export default class Aside extends Component {
   render() {
@@ -18,6 +19,8 @@ export default class Aside extends Component {
       	<Model />
       	<hr />
         <Product />
+        <hr />
+        <Pan />
       </aside>
     );
   }
