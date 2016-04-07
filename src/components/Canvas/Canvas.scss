@@ -12,6 +12,14 @@
   overflow: hidden;
 }
 
+.canvas__wrapper--panning {
+  cursor: grab;
+
+  .canvas__container {
+    pointer-events: none;
+  }
+}
+
 .canvas__container {
   min-width: 100%;
   min-height: calc(100vh - #{$header-height});
