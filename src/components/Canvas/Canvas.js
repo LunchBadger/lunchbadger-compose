@@ -46,19 +46,13 @@ export default class Canvas extends Component {
     this.canvasPan = new CanvasPan(this.canvasWrapper, this.canvas);
     this.paper = new Paper(this.canvas, this.graph, this.state.quadrantSizes);
 
-    const el = new joint.shapes.basic.Rect({
-      size: {
-        height: 40,
-        width: 40
-      }
-    });
-
+    const el = new joint.shapes.basic.Rect({size: {width: 300, height: 300}});
     const el10 = el.clone().set('group', backendGroupName).position(100, 100);
     const el20 = el.clone().set('group', privateGroupName).position(500, 100);
     const el11 = el.clone().set('group', gatewaysGroupName).position(900, 100);
     const el21 = el.clone().set('group', publicGroupName).position(1300, 100);
 
-    this.graph.addCells([el10, el20, el11, el21]);
+    //this.graph.addCells([el10, el20, el11, el21]);
     this._handleQuadrantResize();
 
     AppState.addChangeListener(this.appStateChange);

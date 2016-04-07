@@ -31,25 +31,7 @@ export default (ComposedComponent) => {
 
     render() {
       return (
-        <div className="canvas-element">
-          <div className="canvas-element__inside">
-            <div className="canvas-element__icon">
-              <i className={`fa ${this.props.icon}`}/>
-            </div>
-            <div className="canvas-element__title">
-              <InlineEdit
-                validate={this.validateName}
-                activeClassName="editing"
-                text={this.state.name}
-                paramName="name"
-                change={this.nameChanged.bind(this)}
-              />
-            </div>
-          </div>
-          <div className="canvas-element__extra">
             <ComposedComponent ref={(ref) => this.element = ref} {...this.props} />
-          </div>
-        </div>
       );
     }
   }

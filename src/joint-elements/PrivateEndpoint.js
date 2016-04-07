@@ -1,12 +1,13 @@
 import joint from 'rappid';
+import jointEntity from './Entity';
+import jointEntityView from  './EntityView';
 
-export default joint.dia.Element.extend({
-  markup: '<rect class="card"/>',
+
+export default jointEntity.extend({
   defaults: joint.util.deepSupplement({
     type: 'lunchBadger.PrivateEndpoint',
-    size: { width: 200, height: 200 },
     attrs: {
-      'rect': {width: 200, height: 30, fill: '#fff'}
+      '.label': {text: 'Private Endpoint'}
     }
-  }, joint.dia.Element.prototype.defaults)
+  }, jointEntity.prototype.defaults)
 });
