@@ -1,5 +1,14 @@
 @import '../../config';
-
+svg {
+  text {
+    &.icon, &.port-icon {
+      font-family: FontAwesome;
+    }
+    &.icon {
+      font-size: 30px;
+    }
+  }
+}
 .canvas-element {
   max-width: 80%;
   min-width: 200px;

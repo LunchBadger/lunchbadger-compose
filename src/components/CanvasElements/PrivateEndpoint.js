@@ -14,9 +14,7 @@ class PrivateEndpoint extends Component {
   componentDidMount() {
     console.log(joint.shapes.lunchBadger);
     var Entity = new joint.shapes.lunchBadger.PrivateEndpoint({
-      position: {x: 20, y: 20},
-      outPorts: ['out'],
-      inPorts: ['in']
+      position: {x: 20, y: 20}
     });
 
     this.props.graph.addCell(Entity.set('group', privateGroupName).position(430, 100));
