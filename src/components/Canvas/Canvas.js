@@ -14,6 +14,7 @@ import joint from 'rappid';
 import '../../joint-elements';
 import {findDOMNode} from 'react-dom';
 import AppState from 'stores/AppState';
+import classNames from 'classnames';
 
 export default class Canvas extends Component {
   constructor(props) {
@@ -90,9 +91,14 @@ export default class Canvas extends Component {
   }
 
   render() {
+    const canvasWrapperClass = classNames({
+      'canvas__wrapper': true,
+      'canvas__wrapper--panning': this.state.panning
+    });
+    
     return (
       <section className="canvas">
-        <div className="canvas__wrapper" ref="canvasWrapper">
+        <div className={canvasWrapperClass} ref="canvasWrapper">
           <div className="canvas__legend">
             <div className="canvas__label canvas__label--left">The Data</div>
             <div className="canvas__label canvas__label--right">The World</div>

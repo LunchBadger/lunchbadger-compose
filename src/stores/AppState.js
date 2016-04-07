@@ -22,6 +22,10 @@ class AppState extends BaseStore {
         this.setStateKey('panning', false);
         this.emitChange();
         break;
+      case 'setWorkingTool':
+        this.setStateKey('workingTool', action.toolName);
+        this.emitChange();
+        break;
     }
   }
 
