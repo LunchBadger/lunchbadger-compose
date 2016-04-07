@@ -6,7 +6,7 @@ import jointEntityView from  './EntityView';
 export default jointEntity.extend({
   defaults: joint.util.deepSupplement({
     type: 'lunchBadger.Product',
-    icon: '&#f187',
+    icon: '&#xf187',
     outPorts: [],
     inPorts: ['in'],
     attrs: {

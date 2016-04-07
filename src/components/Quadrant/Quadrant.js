@@ -10,6 +10,7 @@ export default (ComposedComponent) => {
       resizable: PropTypes.bool,
       data: PropTypes.object.isRequired,
       graph: PropTypes.object.isRequired,
+      onResize: PropTypes.func,
       onResizeEnd: PropTypes.func
     };
 
@@ -47,7 +48,11 @@ export default (ComposedComponent) => {
       this.quadrantBounds = this.quadrant.getBoundingClientRect();
       const newWidth = event.clientX - this.quadrantBounds.left;
 
-      this.setState({quadrantWidth: `${newWidth}px`});
+      this.setState({quadrantWidth: `${newWidth}px`}, () => {
+        if (_.isFunction(this.props.onResize)) {
+          this.props.onResize(this.quadrantBounds);
+        }
+      });
     }
 
     render() {

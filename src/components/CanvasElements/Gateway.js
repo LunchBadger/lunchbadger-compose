@@ -1,22 +1,39 @@
 import React, {Component, PropTypes} from 'react';
 import CanvasElement from './CanvasElement';
-import Pipeline from './Subelements/Pipeline';
 import './CanvasElement.scss';
 import updateGateway from '../../actions/Gateway/update';
+import joint from 'rappid';
+import {groupName as gatewaysGroupName} from '../Quadrant/GatewaysQuadrant';
 
 class Gateway extends Component {
   static propTypes = {
-    entity: PropTypes.object.isRequired
+    entity: PropTypes.object.isRequired,
+    size: PropTypes.object.isRequired,
+    position: PropTypes.object.isRequired
   };
 
-  renderPipelines() {
-    return this.props.entity.pipelines.map((pipeline) => {
-      return (
-        <div key={pipeline.id} className="canvas-element__sub-element">
-          <Pipeline entity={pipeline}/>
-        </div>
-      );
-    });
+  componentDidMount() {
+
+    const {x, y} = this.props.position;
+    const {width, height} = this.props.size;
+
+    this.element = new joint.shapes.lunchBadger.Gateway();
+
+    this.props.graph.addCell(
+      this.element.set('group', gatewaysGroupName)
+        .position(x, y)
+        .resize(width, height)
+    );
+  }
+
+  componentDidUpdate() {
+    const {x} = this.props.position;
+    const {width, height} = this.props.size;
+    const y = this.element.getBBox().y;
+
+    this.element
+      .position(x, y)
+      .resize(width, height);
   }
 
   onNameUpdate(name) {
@@ -24,14 +41,7 @@ class Gateway extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <div className="canvas-element__sub-elements">
-          <div className="canvas-element__sub-elements__title">Pipelines</div>
-          {this.renderPipelines()}
-        </div>
-      </div>
-    );
+    return null;
   }
 }
 

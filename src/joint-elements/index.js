@@ -16,23 +16,25 @@ joint.shapes.lunchBadger = {
   Entity: jointEntity,
   EntityView: jointEntityView,
   PrivateEndpoint: jointPrivateEndpoint,
-  PrivateEndpointView: jointEntityView
+  PrivateEndpointView: jointEntityView,
   PublicEndpoint: jointPublicEndpoint,
-  PublicEndpointView: jointEntityView
+  PublicEndpointView: jointEntityView,
   Product: jointProduct,
-  ProducttView: jointEntityView
+  ProductView: jointEntityView,
   Gateway: jointGateway,
-  GatewayView: jointEntityView
+  GatewayView: jointEntityView,
   Memory: jointMemory,
-  MemoryView: jointEntityView
+  MemoryView: jointEntityView,
+  Model: jointModel,
+  ModelView: jointEntityView,
   Mongo: jointMongo,
-  MongoView: jointEntityView
+  MongoView: jointEntityView,
   Oracle: jointOracle,
   OracleView: jointEntityView,
-  Salesfroce: jointSalesfroce,
-  SalesfroceView: jointEntityView,
+  Salesforce: jointSalesforce,
+  SalesforceView: jointEntityView,
   SQL: jointSQL,
-  SQLView: jointEntityView,
+  SQLView: jointEntityView
 };
 
 export default joint.shapes.lunchBadger;

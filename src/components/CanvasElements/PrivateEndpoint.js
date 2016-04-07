@@ -1,23 +1,39 @@
 import React, {Component, PropTypes} from 'react';
 import CanvasElement from './CanvasElement';
-import Port from './Port';
 import './CanvasElement.scss';
 import updatePrivateEndpoint from '../../actions/PrivateEndpoint/update';
 import joint from 'rappid';
-import PrivateQuadrant, {groupName as privateGroupName} from '../Quadrant/PrivateQuadrant';
+import {groupName as privateGroupName} from '../Quadrant/PrivateQuadrant';
 
 class PrivateEndpoint extends Component {
   static propTypes = {
-    entity: PropTypes.object.isRequired
+    entity: PropTypes.object.isRequired,
+    size: PropTypes.object.isRequired,
+    position: PropTypes.object.isRequired
   };
 
   componentDidMount() {
-    console.log(joint.shapes.lunchBadger);
-    var Entity = new joint.shapes.lunchBadger.PrivateEndpoint({
-      position: {x: 20, y: 20}
-    });
 
-    this.props.graph.addCell(Entity.set('group', privateGroupName).position(430, 100));
+    const {x, y} = this.props.position;
+    const {width, height} = this.props.size;
+
+    this.element = new joint.shapes.lunchBadger.PrivateEndpoint();
+
+    this.props.graph.addCell(
+      this.element.set('group', privateGroupName)
+        .position(x, y)
+        .resize(width, height)
+    );
+  }
+
+  componentDidUpdate() {
+    const {x} = this.props.position;
+    const {width, height} = this.props.size;
+    const y = this.element.getBBox().y;
+
+    this.element
+      .position(x, y)
+      .resize(width, height);
   }
 
   onNameUpdate(name) {
