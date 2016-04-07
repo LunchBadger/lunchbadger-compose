@@ -5,12 +5,12 @@ import jointEntityView from  './EntityView';
 
 export default jointEntity.extend({
   defaults: joint.util.deepSupplement({
-    type: 'lunchBadger.PrivateEndpoint',
-    icon: '&#xf14e',
-    outPorts: ['out'],
-    inPorts: [],
+    type: 'lunchBadger.Product',
+    icon: '&#xf187',
+    outPorts: [],
+    inPorts: ['in'],
     attrs: {
-      '.label': {text: 'Private Endpoint'}
+      '.label': {text: 'Product'}
     }
   }, jointEntity.prototype.defaults)
 });
