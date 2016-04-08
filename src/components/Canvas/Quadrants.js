@@ -15,7 +15,7 @@ export default class Quadrants extends Component {
   static propTypes = {
     onGroupResize: PropTypes.func,
     quadrantSizes: PropTypes.instanceOf(QuadrantSizes).isRequired,
-    graph: PropTypes.object.isRequired,
+    paper: PropTypes.object,
     className: PropTypes.string
   };
 
@@ -45,41 +45,38 @@ export default class Quadrants extends Component {
   }
 
   render() {
+    
     return (
       <div className={this.props.className}>
         <BackendQuadrant onResizeEnd={() => this._handleQuadrantResize()}
                          onResize={() => this._handleQuadrantResize()}
                          ref="backendQuadrant"
                          data={Backend}
-                         graph={this.props.graph}
+                         paper={this.props.paper}
                          resizable
-                         quadrantSizes={this.props.quadrantSizes}
                          title="Backend"/>
 
         <PrivateQuadrant onResizeEnd={() => this._handleQuadrantResize()}
                          onResize={() => this._handleQuadrantResize()}
                          ref="privateQuadrant"
                          data={Private}
-                         graph={this.props.graph}
+                         paper={this.props.paper}
                          resizable
-                         quadrantSizes={this.props.quadrantSizes}
                          title="Private"/>
 
         <GatewaysQuadrant onResizeEnd={() => this._handleQuadrantResize()}
                           onResize={() => this._handleQuadrantResize()}
                           ref="gatewaysQuadrant"
                           data={Gateway}
-                          graph={this.props.graph}
+                          paper={this.props.paper}
                           resizable
-                          quadrantSizes={this.props.quadrantSizes}
                           title="Gateways"/>
 
         <PublicQuadrant onResizeEnd={() => this._handleQuadrantResize()}
                         onResize={() => this._handleQuadrantResize()}
                         ref="publicQuadrant"
                         data={Public}
-                        graph={this.props.graph}
-                        quadrantSizes={this.props.quadrantSizes}
+                        paper={this.props.paper}
                         title="Public"/>
       </div>
     );

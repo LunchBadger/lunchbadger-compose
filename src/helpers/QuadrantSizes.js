@@ -53,6 +53,31 @@ class QuadrantSizes {
       this.quadrantBounds[publicGroupName].width
     );
   }
+
+	/**
+   * @param graph {joint.dia.Graph}
+   * @param quadrant {Quadrant}
+   * @param spacing {Number}
+   */
+  getNextAvailableCell(graph, quadrant, spacing = 20) {
+    const allCells = graph.getCells();
+    let maxOffset = 0;
+
+    allCells.forEach((cell) => {
+      const group = cell.get('group');
+
+      if (group === quadrant) {
+        const cellBBox = cell.getBBox();
+        const totalOffset = cellBBox.y + cellBBox.height;
+
+        if (totalOffset > maxOffset) {
+          maxOffset = totalOffset;
+        }
+      }
+    });
+
+    return maxOffset + spacing;
+  }
 }
 
 export default QuadrantSizes;

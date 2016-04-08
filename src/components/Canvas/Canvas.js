@@ -79,7 +79,7 @@ export default class Canvas extends Component {
                      ref="canvas"
                      onGroupResize={(quadrantSizes) => this._handleGroupResize(quadrantSizes)}
                      quadrantSizes={this.state.quadrantSizes}
-                     graph={this.graph}
+                     paper={this.paper}
           />
         </div>
       </section>

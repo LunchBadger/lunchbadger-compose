@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import joint from 'rappid';
+import AppState from 'stores/AppState';
 
 export default class Paper {
   /**
@@ -46,6 +47,16 @@ export default class Paper {
     }
 
     this.paper.setDimensions(paperWidth, paperHeight);
+    AppState.emitChange();
+  }
+
+  changeCanvasHeight(newHeight) {
+    const canvasHeight = this.canvasBounds.bottom - this.canvasBounds.top;
+    const heightOffsetLimit = 100;
+
+    if (newHeight + heightOffsetLimit > canvasHeight) {
+      this.resizePaper({height: newHeight + heightOffsetLimit});
+    }
   }
 
   _restrictElementTranslations(elementView) {

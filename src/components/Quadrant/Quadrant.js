@@ -9,7 +9,7 @@ export default (ComposedComponent) => {
       title: PropTypes.string.isRequired,
       resizable: PropTypes.bool,
       data: PropTypes.object.isRequired,
-      graph: PropTypes.object.isRequired,
+      paper: PropTypes.object,
       onResize: PropTypes.func,
       onResizeEnd: PropTypes.func
     };
@@ -56,8 +56,17 @@ export default (ComposedComponent) => {
     }
 
     render() {
+      let quadrantHeight = '100%';
+
+      if (this.props.paper) {
+        const {paper} = this.props.paper;
+
+        quadrantHeight = `${paper.svg.getAttribute('height')}px`;
+      }
+
       return (
-        <div className="quadrant" ref="quadrant" style={{width: this.state.quadrantWidth}}>
+        <div className="quadrant" ref="quadrant"
+             style={{width: this.state.quadrantWidth, height: quadrantHeight}}>
           <div className="quadrant__title">{this.props.title}</div>
           <div className="quadrant__body">
             <ComposedComponent {...this.props} entities={this.state.entities}/>
