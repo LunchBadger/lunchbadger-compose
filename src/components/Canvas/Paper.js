@@ -19,7 +19,7 @@ export default class Paper {
       width: this.canvasBounds.width,
       height: this.canvasBounds.height,
       model: this.graph,
-      gridSize: 1,
+      gridSize: 25,
       restrictTranslate: this._restrictElementTranslations.bind(this)
     });
   }
@@ -69,12 +69,12 @@ export default class Paper {
     if (_.isUndefined(fromLeft) || _.isUndefined(quadrantWidth)) {
       return;
     }
-
+    console.log(elementView.getBBox());
     return {
-      x: fromLeft,
+      x: fromLeft + 0.1 * quadrantWidth,
       y: 0,
       height: canvasHeight,
-      width: quadrantWidth
+      width: 0.8 * quadrantWidth
     }
   }
 }
