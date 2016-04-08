@@ -4,11 +4,11 @@ import $ from 'jquery';
 const jointEntityViewInterface = {
   initialize: function () {
     // Call the `initialize()` of the parent.
-    joint.shapes.devs.ModelView.prototype.update.apply(this, arguments);
+    joint.shapes.devs.ModelView.prototype.initialize.apply(this, arguments);
   },
   render: function () {
     // Call the `initialize()` of the parent.
-    joint.shapes.devs.ModelView.prototype.update.apply(this, arguments);
+    joint.shapes.devs.ModelView.prototype.render.apply(this, arguments);
     this.renderIcon();
     this.renderPortsIcon();
   },
