@@ -17,12 +17,18 @@ export default (ComposedComponent) => {
       };
     }
 
+    componentWillUpdate(nextProps) {
+      if (this.instance) {
+        const {element} = this.instance;
+        const elementBoundingBox = element.getBBox();
+
+        nextProps.paper.changeCanvasHeight(elementBoundingBox.y + elementBoundingBox.height);
+      }
+    }
+
     componentDidUpdate() {
       const {props, element} = this.instance;
       const elementBoundingBox = element.getBBox();
-
-      console.log(elementBoundingBox);
-
       const {x} = props.position;
       const {width, height} = props.size;
 
@@ -45,7 +51,7 @@ export default (ComposedComponent) => {
 
     render() {
       return (
-            <ComposedComponent ref={(ref) => this.instance = ref} {...this.props} />
+        <ComposedComponent ref={(ref) => this.instance = ref} {...this.props} />
       );
     }
   }

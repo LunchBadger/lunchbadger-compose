@@ -10,7 +10,7 @@
 
 .canvas__wrapper {
   overflow: hidden;
-  max-height: 100vh;
+  max-height: calc(100vh - 60px);
 }
 
 .canvas__wrapper--panning {
@@ -34,7 +34,7 @@
     position: absolute;
     left: 0;
     top: 50px;
-    height: calc(100% - 50px);
+    min-height: calc(100% - 50px);
   }
 }
 

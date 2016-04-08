@@ -45,6 +45,7 @@ export default class Quadrants extends Component {
   }
 
   render() {
+    
     return (
       <div className={this.props.className}>
         <BackendQuadrant onResizeEnd={() => this._handleQuadrantResize()}
