@@ -20,6 +20,9 @@ export default class Paper {
       height: this.canvasBounds.height,
       model: this.graph,
       gridSize: 1,
+      defaultLink: new joint.shapes.lunchBadger.MainLink({
+
+      }),
       restrictTranslate: this._restrictElementTranslations.bind(this)
     });
   }

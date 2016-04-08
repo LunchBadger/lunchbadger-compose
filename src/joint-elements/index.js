@@ -11,6 +11,8 @@ import jointPublicEndpoint from './PublicEndpoint';
 import jointProduct from './Product';
 import jointSalesforce from './Salesforce';
 import jointSQL from './SQL';
+import mainLink from './MainLink';
+import mainLinkView from './MainLinkView';
 
 joint.shapes.lunchBadger = {
   Entity: jointEntity,
@@ -34,7 +36,9 @@ joint.shapes.lunchBadger = {
   Salesforce: jointSalesforce,
   SalesforceView: jointEntityView,
   SQL: jointSQL,
-  SQLView: jointEntityView
+  SQLView: jointEntityView,
+  MainLink: mainLink,
+  MainLinkView: mainLinkView
 };
 
 export default joint.shapes.lunchBadger;
