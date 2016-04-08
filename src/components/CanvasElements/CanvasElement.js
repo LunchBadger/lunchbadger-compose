@@ -1,12 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import './CanvasElement.scss';
-import InlineEdit from 'react-edit-inline';
 
 export default (ComposedComponent) => {
   return class CanvasElement extends Component {
     static propTypes = {
       icon: PropTypes.string.isRequired,
-      entity: PropTypes.object.isRequired
+      entity: PropTypes.object.isRequired,
+      paper: PropTypes.object
     };
 
     constructor(props) {
@@ -17,13 +17,27 @@ export default (ComposedComponent) => {
       };
     }
 
+    componentDidUpdate() {
+      const {props, element} = this.instance;
+      const elementBoundingBox = element.getBBox();
+
+      console.log(elementBoundingBox);
+
+      const {x} = props.position;
+      const {width, height} = props.size;
+
+      element
+        .position(x, elementBoundingBox.y)
+        .resize(width, height);
+    }
+
     validateName(text) {
       return (text.length > 0);
     }
 
     nameChanged(data) {
-      if (typeof this.element.onNameUpdate === 'function') {
-        this.element.onNameUpdate(data.name);
+      if (typeof this.instance.onNameUpdate === 'function') {
+        this.instance.onNameUpdate(data.name);
       }
 
       this.setState({...data});
@@ -31,7 +45,7 @@ export default (ComposedComponent) => {
 
     render() {
       return (
-            <ComposedComponent ref={(ref) => this.element = ref} {...this.props} />
+            <ComposedComponent ref={(ref) => this.instance = ref} {...this.props} />
       );
     }
   }
