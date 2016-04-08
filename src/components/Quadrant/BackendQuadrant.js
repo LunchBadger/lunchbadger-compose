@@ -7,7 +7,8 @@ export const groupName = 'Backend';
 class BackendQuadrant extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    entities: PropTypes.array
+    entities: PropTypes.array,
+    paper: PropTypes.object
   };
 
   constructor(props) {

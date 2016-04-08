@@ -9,7 +9,7 @@ export default (ComposedComponent) => {
       title: PropTypes.string.isRequired,
       resizable: PropTypes.bool,
       data: PropTypes.object.isRequired,
-      graph: PropTypes.object.isRequired,
+      paper: PropTypes.object,
       onResize: PropTypes.func,
       onResizeEnd: PropTypes.func
     };
