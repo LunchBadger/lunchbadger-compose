@@ -34,7 +34,7 @@ export default (ComposedComponent) => {
 
       element
         .position(x, elementBoundingBox.y)
-        .resize(width, height);
+        .resize(width, element.get('size').height);
     }
 
     validateName(text) {

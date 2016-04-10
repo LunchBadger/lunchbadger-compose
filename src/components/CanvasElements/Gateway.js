@@ -16,13 +16,15 @@ class Gateway extends Component {
   componentDidMount() {
     const {x, y} = this.props.position;
     const {width, height} = this.props.size;
+    let elHeight;
 
     this.element = new joint.shapes.lunchBadger.Gateway();
+    elHeight = this.element.get('size').height;
 
     this.props.paper.graph.addCell(
       this.element.set('group', gatewaysGroupName)
         .position(x, y)
-        .resize(width, height)
+        .resize(width, elHeight)
     );
   }
 

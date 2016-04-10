@@ -3,6 +3,7 @@ import jointEntity from './Entity';
 import jointEntityView from './EntityView';
 import jointPrivateEndpoint from './PrivateEndpoint';
 import jointGateway from './Gateway';
+import jointGatewayView from './GatewayView';
 import jointMemory from './Memory';
 import jointModel from './Model';
 import jointMongo from './Mongo';
@@ -22,7 +23,7 @@ joint.shapes.lunchBadger = {
   Product: jointProduct,
   ProductView: jointEntityView,
   Gateway: jointGateway,
-  GatewayView: jointEntityView,
+  GatewayView: jointGatewayView,
   Memory: jointMemory,
   MemoryView: jointEntityView,
   Model: jointModel,
