@@ -15,6 +15,7 @@ export default joint.shapes.basic.Generic.extend(_.extend({}, joint.shapes.basic
     outPorts: [],
 
     icon: '&#xf040',
+    name: 'Entity',
 
     attrs: {
       '.': { magnet: false },
@@ -32,10 +33,10 @@ export default joint.shapes.basic.Generic.extend(_.extend({}, joint.shapes.basic
         'pointer-events': 'none'
       },
       '.icon': {x: 30, y: 35, 'font-size': 30, width: 40, height: 40, fill: '#000000'},
-      '.label': { text: 'Model', 'ref-x': 80, 'ref-y': 18, ref: '.body', 'text-anchor': 'left', fill: '#000000' },
+      '.label': { text: 'Entity', 'ref-x': 80, 'ref-y': 18, ref: '.body', 'text-anchor': 'left', fill: '#000000' },
       '.inPorts circle': {type: 'input'},
-      '.inPorts .port-label': {x: 0, dy: -7.5, 'text-anchor': 'middle', fill: '#000000'},
-      '.outPorts .port-label':{x: -6, dy: -7.5, fill: '#000000'}
+      '.inPorts .port-label': { x: 0, dy: -7.5, 'text-anchor': 'middle', fill: '#000000' },
+      '.outPorts .port-label':{ x: -6, dy: -7.5, fill: '#000000' }
     }
 
   }, joint.shapes.basic.Generic.prototype.defaults),

@@ -18,6 +18,10 @@ const jointEntityViewInterface = {
     joint.shapes.devs.ModelView.prototype.update.apply(this, arguments);
     this.renderPortsIcon();
   },
+  renderName: function () {
+    var nameHandler = this.$el.find('.iconlabel tspan');
+    iconHandler.html(this.model.attributes.name);
+  },
   renderIcon: function () {
     var iconHandler = this.$el.find('.icon');
     iconHandler.html(this.model.attributes.icon);
@@ -26,6 +30,10 @@ const jointEntityViewInterface = {
     _.each(this.$el.find('.port-icon'), function (port) {
       $(port).html('&#xf061');
     })
+  },
+  pointerdown: function () {
+    joint.shapes.devs.ModelView.prototype.pointerdown.apply(this, arguments);
+    this.model.toFront();
   }
 }
 

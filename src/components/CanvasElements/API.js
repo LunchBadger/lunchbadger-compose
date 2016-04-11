@@ -15,13 +15,15 @@ class API extends Component {
   componentDidMount() {
     const {x, y} = this.props.position;
     const {width, height} = this.props.size;
+    let elHeight;
 
     this.element = new joint.shapes.lunchBadger.API();
+    elHeight = this.element.get('size').height;
 
     this.props.paper.graph.addCell(
       this.element.set('group', publicGroupName)
         .position(x, y)
-        .resize(width, height)
+        .resize(width, elHeight)
     );
   }
 
