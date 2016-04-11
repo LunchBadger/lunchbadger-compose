@@ -69,11 +69,15 @@ export default class Paper {
     if (_.isUndefined(fromLeft) || _.isUndefined(quadrantWidth)) {
       return;
     }
-    
+
+    /**
+     * TODO: canvasHeight should expand when element is close to bottom border
+     */
+
     return {
       x: fromLeft + 0.1 * quadrantWidth,
       y: 0,
-      height: canvasHeight,
+      height: 50 * canvasHeight,
       width: 0.8 * quadrantWidth
     }
   }

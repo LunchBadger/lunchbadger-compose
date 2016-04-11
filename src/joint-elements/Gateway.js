@@ -25,6 +25,7 @@ export default jointEntity.extend({
     this.on('change:attrs', this.processPorts, this);
     this.on('change:attrs', this.processPipelines, this);
     this.on('change:pipelines', this.updatePipelineAttrs, this);
+    this.on('change:inPorts change:outPorts', this.updatePortsAttrs, this);
 
     // Call the `initialize()` of the parent.
     this.constructor.__super__.constructor.__super__.initialize.apply(this, arguments);
@@ -49,8 +50,6 @@ export default jointEntity.extend({
 
   updatePipelineAttrs: function () {
     this.updatePortsAttrs();
-    this.on('change:inPorts change:outPorts', this.updatePortsAttrs, this);
-
     var currAttrs = this.get('attrs');
     _.each(this._pipelineSelectors, function(selector) {
       if (currAttrs[selector]) delete currAttrs[selector];
@@ -64,8 +63,9 @@ export default jointEntity.extend({
       this._pipelineSelectors = this._pipelineSelectors.concat(_.keys(pipelineAttributes));
       _.extend(attrs, pipelineAttributes);
     }, this);
+
     if (this.get('pipelines')) {
-      _.extend(attrs, this.updateContainerAttrs(this.get('pipelines').length));
+      this.updateContainerAttrs(this.get('pipelines').length)
     }
 
     this.attr(attrs, { silent: true });
@@ -77,22 +77,11 @@ export default jointEntity.extend({
 
   updateContainerAttrs: function (length) {
     var currentSize = this.get('size');
-    var attrs = {};
-
-    var selector = '.body';
-    attrs[selector] = {
-      width: currentSize.width,
-      height: 50 - 10 + length * 30,
-      stroke: '#cccccc',
-      fill: '#fffff'
-    };
 
     this.set('size', {
       width: currentSize.width,
       height: 50 - 10 + length * 30
     });
-
-    return attrs;
   },
 
   getPipelineAttrs: function (pipelineName, index, total, selector, type) {

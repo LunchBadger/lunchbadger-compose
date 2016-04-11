@@ -40,10 +40,7 @@ const jointGatewayViewInterface = {
     this.model.set('outPorts', outports);
     //console.log(this.model);
     this.model.updatePipelineAttrs();
-
   }
-
-
-}
+};
 
 export default jointEntityView.extend(jointGatewayViewInterface)
