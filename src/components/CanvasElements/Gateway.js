@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import {Component, PropTypes} from 'react';
 import CanvasElement from './CanvasElement';
 import './CanvasElement.scss';
 import updateGateway from '../../actions/Gateway/update';
@@ -15,7 +15,7 @@ class Gateway extends Component {
 
   componentDidMount() {
     const {x, y} = this.props.position;
-    const {width, height} = this.props.size;
+    const {width} = this.props.size;
     let elHeight;
 
     this.element = new joint.shapes.lunchBadger.Gateway();

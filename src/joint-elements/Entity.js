@@ -1,5 +1,5 @@
 import joint from 'rappid';
-import jointEntityView from './EntityView';
+import _ from 'lodash';
 
 export default joint.shapes.basic.Generic.extend(_.extend({}, joint.shapes.basic.PortsModelInterface, {
 

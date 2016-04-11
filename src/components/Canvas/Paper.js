@@ -69,7 +69,7 @@ export default class Paper {
     if (_.isUndefined(fromLeft) || _.isUndefined(quadrantWidth)) {
       return;
     }
-    console.log(elementView.getBBox());
+    
     return {
       x: fromLeft + 0.1 * quadrantWidth,
       y: 0,

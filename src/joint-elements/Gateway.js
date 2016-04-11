@@ -1,6 +1,6 @@
 import joint from 'rappid';
 import jointEntity from './Entity';
-
+import _ from 'lodash';
 
 export default jointEntity.extend({
   markup: '<g class="rotatable"><g class="scalable"><rect class="body"/></g><text class="icon fa"/><text class="label"/><g class="pipelines"/><g class="inPorts"/><g class="outPorts"/></g>',
@@ -36,19 +36,18 @@ export default jointEntity.extend({
   },
 
   processPipelines: function () {
-    var previousPipelines = this.pipelines;
     var pipelines = {};
 
-    _.each(this.get('attrs'), function(attrs, selector) {
+    _.each(this.get('attrs'), function(attrs) {
       if (attrs && attrs.pipeline) {
         pipelines[attrs.pipeline.id] = attrs.pipeline;
       }
     });
-    
+
     this.pipelines = pipelines;
   },
 
-  updatePipelineAttrs: function (eventName) {
+  updatePipelineAttrs: function () {
     this.updatePortsAttrs();
     this.on('change:inPorts change:outPorts', this.updatePortsAttrs, this);
 
@@ -96,8 +95,7 @@ export default jointEntity.extend({
     return attrs;
   },
 
-  getPipelineAttrs: function (pipelineName, index, total, selector) {
-
+  getPipelineAttrs: function (pipelineName, index, total, selector, type) {
     var attrs = {};
 
     var pipelineClass = 'pipeline' + index;
@@ -111,7 +109,6 @@ export default jointEntity.extend({
   },
 
   getPortAttrs: function(portName, index, total, selector, type) {
-
     var attrs = {};
 
     var portClass = 'port' + index;

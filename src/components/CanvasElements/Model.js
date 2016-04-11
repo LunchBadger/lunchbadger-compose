@@ -1,7 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import {Component, PropTypes} from 'react';
 import CanvasElement from './CanvasElement';
 import './CanvasElement.scss';
 import joint from 'rappid';
+import updateModel from 'actions/Model/update';
 import {groupName as privateGroupName} from '../Quadrant/PrivateQuadrant';
 
 class Model extends Component {
@@ -26,7 +27,7 @@ class Model extends Component {
   }
 
   onNameUpdate(name) {
-    updatePublicEndpoint(this.props.entity.id, {name});
+    updateModel(this.props.entity.id, {name});
   }
 
   render() {

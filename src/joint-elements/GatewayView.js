@@ -1,5 +1,6 @@
 import joint from 'rappid';
 import jointEntityView from './EntityView';
+import _ from 'lodash';
 
 const jointGatewayViewInterface = {
   initialize: function () {
@@ -18,7 +19,6 @@ const jointGatewayViewInterface = {
     jointEntityView.prototype.update.apply(this, arguments);
   },
   renderPipelines: function () {
-    console.log('renderpipes');
     var $pipelines = this.$('.pipelines').empty();
     var pipelineTemplate = _.template(this.model.pipelineMarkup);
 

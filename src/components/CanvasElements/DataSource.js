@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import {Component, PropTypes} from 'react';
 import CanvasElement from './CanvasElement';
 import './CanvasElement.scss';
 import updateBackend from '../../actions/DataSource/update';
@@ -17,7 +17,6 @@ class DataSource extends Component {
   componentDidMount() {
     const {x, y} = this.props.position;
     const {width, height} = this.props.size;
-  console.log(this.props.type);
     this.element = new joint.shapes.lunchBadger[this.props.type]();
 
     this.props.paper.graph.addCell(
