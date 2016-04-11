@@ -4,7 +4,7 @@ import Endpoint from '../tools/Endpoint';
 import Gateway from '../tools/Gateway';
 import DataSource from '../tools/DataSource';
 import Model from '../tools/Model';
-import Product from '../tools/Product';
+import API from '../tools/API';
 import Pan from '../tools/Pan';
 
 export default class Aside extends Component {
@@ -18,7 +18,7 @@ export default class Aside extends Component {
       	<DataSource />
       	<Model />
       	<hr />
-        <Product />
+        <API />
         <hr />
         <Pan />
       </aside>
