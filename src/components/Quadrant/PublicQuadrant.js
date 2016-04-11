@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import Quadrant from './Quadrant';
 import PublicEndpoint from '../CanvasElements/PublicEndpoint';
-import Product from '../CanvasElements/Product';
+import API from '../CanvasElements/API';
 
 export const groupName = 'Public';
 
@@ -39,9 +39,9 @@ class PublicQuadrant extends Component {
               icon="fa-globe"
               entity={entity}/>
           );
-        case 'Product':
+        case 'API':
           return (
-            <Product
+            <API
               size={{width: width, height: 50}}
               position={{x: fromLeft, y: nextAvailablePosition}}
               paper={this.props.paper}

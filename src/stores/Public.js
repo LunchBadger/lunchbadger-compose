@@ -18,12 +18,12 @@ class Public extends BaseStore {
           this.updateEntity(action.id, action.data);
           this.emitChange();
           break;
-        case 'AddProduct':
-          action.product.name += ' ' + (Publics.length + 1);
-          Publics.push(action.product);
+        case 'AddAPI':
+          action.api.name += ' ' + (Publics.length + 1);
+          Publics.push(action.api);
           this.emitChange();
           break;
-        case 'UpdateProduct':
+        case 'UpdateAPI':
           this.updateEntity(action.id, action.data);
           this.emitChange();
           break;
