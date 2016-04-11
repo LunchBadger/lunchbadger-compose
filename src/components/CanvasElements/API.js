@@ -4,7 +4,7 @@ import joint from 'rappid';
 import './CanvasElement.scss';
 import {groupName as publicGroupName} from '../Quadrant/PublicQuadrant';
 
-class Product extends Component {
+class API extends Component {
   static propTypes = {
     entity: PropTypes.object.isRequired,
     size: PropTypes.object.isRequired,
@@ -16,7 +16,7 @@ class Product extends Component {
     const {x, y} = this.props.position;
     const {width, height} = this.props.size;
 
-    this.element = new joint.shapes.lunchBadger.Product();
+    this.element = new joint.shapes.lunchBadger.API();
 
     this.props.paper.graph.addCell(
       this.element.set('group', publicGroupName)
@@ -30,4 +30,4 @@ class Product extends Component {
   }
 }
 
-export default CanvasElement(Product);
+export default CanvasElement(API);
