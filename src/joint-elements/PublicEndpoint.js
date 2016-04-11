@@ -10,7 +10,7 @@ export default jointEntity.extend({
     inPorts: ['in'],
     attrs: {
       '.label': {text: 'Public Endpoint'},
-      '.outPorts circle': {group: 'public', magnet: 'active'}
+      '.inPorts circle': {group: 'pipeline', magnet: 'active'}
     }
   }, jointEntity.prototype.defaults)
 });

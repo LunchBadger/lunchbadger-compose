@@ -8,7 +8,7 @@ const jointPublicEndpointViewInterface = {
       return model.id !== this.model.id }
     );
     if (modelsBehind[0].get('type') === 'lunchBadger.API') {
-      modelsBehind[0].addEndpoint(this.model);
+      modelsBehind[0].addEndpoint(this.model, this.model.graph.getConnectedLinks(this.model));
       this.model.remove();
     }
   }
