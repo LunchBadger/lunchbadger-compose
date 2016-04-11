@@ -20,8 +20,15 @@ export default class Paper {
       height: this.canvasBounds.height,
       model: this.graph,
       gridSize: 25,
-      restrictTranslate: this._restrictElementTranslations.bind(this)
+      defaultLink: new joint.shapes.lunchBadger.MainLink({}),
+      restrictTranslate: this._restrictElementTranslations.bind(this),
+      validateConnection: this._validateConnections.bind(this),
+      validateMagnet: (cellView, magnet) => {
+        return magnet.getAttribute('magnet') !== 'passive';
+      }
     });
+
+    this.paper.on('cell:pointerup', this._removeEmptyLinks.bind(this));
   }
 
   render() {
@@ -57,6 +64,24 @@ export default class Paper {
     if (newHeight + heightOffsetLimit > canvasHeight) {
       this.resizePaper({height: newHeight + heightOffsetLimit});
     }
+  }
+
+  _validateConnections(cellViewStart, magnetStart, cellViewEnd, magnetEnd) {
+    if (cellViewStart === cellViewEnd) {
+      return false;
+    }
+
+    return magnetStart && magnetEnd && magnetStart.getAttribute('group') === magnetEnd.getAttribute('group');
+  }
+
+  _removeEmptyLinks() {
+    const links = this.graph.getLinks();
+
+    links.forEach((link) => {
+      if (!link.getTargetElement()) {
+        link.remove();
+      }
+    });
   }
 
   _restrictElementTranslations(elementView) {

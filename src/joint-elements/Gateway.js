@@ -15,7 +15,9 @@ export default jointEntity.extend({
     pipelines: ['pipeline 1', 'pipeline 2'],
     attrs: {
       '.label': {text: 'Gateway'},
-      '.pipeline-label': {fill: '#000000'}
+      '.pipeline-label': {fill: '#000000'},
+      '.inPorts circle': {group: 'private'},
+      '.outPorts circle': {group: 'pipeline', magnet: 'active'}
     }
   }, jointEntity.prototype.defaults),
 
@@ -39,7 +41,7 @@ export default jointEntity.extend({
   processPipelines: function () {
     var pipelines = {};
 
-    _.each(this.get('attrs'), function(attrs) {
+    _.each(this.get('attrs'), function (attrs) {
       if (attrs && attrs.pipeline) {
         pipelines[attrs.pipeline.id] = attrs.pipeline;
       }
@@ -51,14 +53,14 @@ export default jointEntity.extend({
   updatePipelineAttrs: function () {
     this.updatePortsAttrs();
     var currAttrs = this.get('attrs');
-    _.each(this._pipelineSelectors, function(selector) {
+    _.each(this._pipelineSelectors, function (selector) {
       if (currAttrs[selector]) delete currAttrs[selector];
     });
 
     this._pipelineSelectors = [];
 
     var attrs = {};
-    _.each(this.get('pipelines'), function(pipelineName, index, pipelines) {
+    _.each(this.get('pipelines'), function (pipelineName, index, pipelines) {
       var pipelineAttributes = this.getPipelineAttrs(pipelineName, index, pipelines.length, '.pipelines');
       this._pipelineSelectors = this._pipelineSelectors.concat(_.keys(pipelineAttributes));
       _.extend(attrs, pipelineAttributes);
@@ -68,7 +70,7 @@ export default jointEntity.extend({
       this.updateContainerAttrs(this.get('pipelines').length)
     }
 
-    this.attr(attrs, { silent: true });
+    this.attr(attrs, {silent: true});
 
     this.processPipelines();
     // Let the outside world (mainly the `ModelView`) know that we're done configuring the `attrs` object.
@@ -91,13 +93,13 @@ export default jointEntity.extend({
     var pipelineSelector = selector + '>.' + pipelineClass;
     var pipelineLabelSelector = pipelineSelector + '>.pipeline-label';
     var pipelineBodySelector = pipelineSelector + '>.pipeline-body';
-    attrs[pipelineLabelSelector] = { text: pipelineName };
-    attrs[pipelineBodySelector] = { pipeline: { id: pipelineName || _.uniqueId(type)} };
-    attrs[pipelineSelector] = { ref: '.body', 'ref-x': 30, 'ref-y': 45 + index * 30 };
+    attrs[pipelineLabelSelector] = {text: pipelineName};
+    attrs[pipelineBodySelector] = {pipeline: {id: pipelineName || _.uniqueId(type)}};
+    attrs[pipelineSelector] = {ref: '.body', 'ref-x': 30, 'ref-y': 45 + index * 30};
     return attrs;
   },
 
-  getPortAttrs: function(portName, index, total, selector, type) {
+  getPortAttrs: function (portName, index, total, selector, type) {
     var attrs = {};
 
     var portClass = 'port' + index;
@@ -105,11 +107,13 @@ export default jointEntity.extend({
     var portLabelSelector = portSelector + '>.port-label';
     var portBodySelector = portSelector + '>.port-body';
 
-    attrs[portLabelSelector] = { text: portName };
-    attrs[portBodySelector] = { port: { id: portName || _.uniqueId(type) , type: type } };
-    attrs[portSelector] = { ref: '.body', 'ref-y': 55 + index * 30 };
+    attrs[portLabelSelector] = {text: portName};
+    attrs[portBodySelector] = {port: {id: portName || _.uniqueId(type), type: type}};
+    attrs[portSelector] = {ref: '.body', 'ref-y': 55 + index * 30};
 
-    if (selector === '.outPorts') { attrs[portSelector]['ref-dx'] = 0; }
+    if (selector === '.outPorts') {
+      attrs[portSelector]['ref-dx'] = 0;
+    }
     return attrs;
   }
 

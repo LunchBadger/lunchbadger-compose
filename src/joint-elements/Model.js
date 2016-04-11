@@ -8,7 +8,9 @@ export default jointEntity.extend({
     outPorts: ['out'],
     inPorts: ['in'],
     attrs: {
-      '.label': {text: 'Model'}
+      '.label': {text: 'Model'},
+      '.inPorts circle': {group: 'datasource'},
+      '.outPorts circle': {group: 'private', magnet: 'active'}
     }
   }, jointEntity.prototype.defaults)
 });

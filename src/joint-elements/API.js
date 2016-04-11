@@ -15,7 +15,8 @@ export default jointEntity.extend({
     attrs: {
       '.label': {text: 'API'},
       '.endpoint-icon': {x: -30, y: 14, 'font-size': 30, width: 40, height: 40, fill: '#000000'},
-      '.endpoint-label': {fill: '#000000'}
+      '.endpoint-label': {fill: '#000000'},
+      '.inPorts circle': {group: 'pipeline'}
     }
 
   }, jointEntity.prototype.defaults),
@@ -125,7 +126,7 @@ export default jointEntity.extend({
     this.set({endpoints: endpoints});
     this.set({'inPorts': inports});
     this.trigger('change:endpoints');
-   
+
   }
 
 });

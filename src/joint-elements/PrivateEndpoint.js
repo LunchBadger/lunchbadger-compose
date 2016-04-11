@@ -8,7 +8,8 @@ export default jointEntity.extend({
     outPorts: ['out'],
     inPorts: [],
     attrs: {
-      '.label': {text: 'Private Endpoint'}
+      '.label': {text: 'Private Endpoint'},
+      '.outPorts circle': {group: 'private', magnet: 'active'}
     }
   }, jointEntity.prototype.defaults)
 });
