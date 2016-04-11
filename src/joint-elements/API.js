@@ -116,7 +116,7 @@ export default jointEntity.extend({
     return attrs;
   },
 
-  addEndpoint: function (endpoint) {
+  addEndpoint: function (endpoint, links) {
     var endpoints = this.get('endpoints');
     endpoints.push(endpoint.get('name'));
     var inports = this.get('inPorts');
@@ -124,6 +124,22 @@ export default jointEntity.extend({
     this.set({endpoints: endpoints});
     this.set({'inPorts': inports});
     this.trigger('change:endpoints');
+
+    if (links.length) {
+      _.each(links, (link) => {
+        if (link.get('source').id === endpoint.id) {
+          link.set('source', {
+            id: this.id,
+            port: endpoint.id + '_' + endpoint.get('inPorts')[0]
+          })
+        } else {
+          link.set('target', {
+            id: this.id,
+            port: endpoint.id + '_' + endpoint.get('inPorts')[0]
+          })
+        }
+      });
+    }
 
   }
 
