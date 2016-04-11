@@ -48,12 +48,10 @@ export default jointEntity.extend({
       }
     });
 
-    console.log(endpoints);
     this.endpoints = endpoints;
   },
 
   updateEndpointAttrs: function () {
-    console.log('triggered');
     this.updatePortsAttrs();
     var currAttrs = this.get('attrs');
     _.each(this._endpointSelectors, function(selector) {
