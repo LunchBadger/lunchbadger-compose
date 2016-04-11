@@ -8,7 +8,8 @@ export default jointEntity.extend({
     outPorts: [],
     inPorts: ['in'],
     attrs: {
-      '.label': {text: 'API'}
+      '.label': {text: 'API'},
+      '.inPorts circle': { type: 'input', magnet: 'passive' }
     }
   }, jointEntity.prototype.defaults)
 });

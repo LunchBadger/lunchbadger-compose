@@ -15,7 +15,8 @@ export default jointEntity.extend({
     pipelines: ['pipeline 1', 'pipeline 2'],
     attrs: {
       '.label': {text: 'Gateway'},
-      '.pipeline-label': {fill: '#000000'}
+      '.pipeline-label': {fill: '#000000'},
+      '.inPorts circle': { type: 'input', magnet: 'passive' }
     }
   }, jointEntity.prototype.defaults),
 
