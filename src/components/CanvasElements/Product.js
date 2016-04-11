@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import {Component, PropTypes} from 'react';
 import CanvasElement from './CanvasElement';
 import joint from 'rappid';
 import './CanvasElement.scss';

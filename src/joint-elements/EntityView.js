@@ -1,5 +1,6 @@
 import joint from 'rappid';
 import $ from 'jquery';
+import _ from 'lodash';
 
 const jointEntityViewInterface = {
   initialize: function () {

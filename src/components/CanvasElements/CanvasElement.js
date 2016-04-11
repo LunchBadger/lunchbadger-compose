@@ -30,11 +30,11 @@ export default (ComposedComponent) => {
       const {props, element} = this.instance;
       const elementBoundingBox = element.getBBox();
       const {x} = props.position;
-      const {width, height} = props.size;
+      const {width} = props.size;
 
       element
         .position(x, elementBoundingBox.y)
-        .resize(width, height);
+        .resize(width, element.get('size').height);
     }
 
     validateName(text) {

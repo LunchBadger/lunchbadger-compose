@@ -1,4 +1,5 @@
 import joint from 'rappid';
+import _ from 'lodash';
 
 export default joint.shapes.basic.Generic.extend(_.extend({}, joint.shapes.basic.PortsModelInterface, {
 

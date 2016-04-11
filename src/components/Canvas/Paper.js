@@ -19,7 +19,7 @@ export default class Paper {
       width: this.canvasBounds.width,
       height: this.canvasBounds.height,
       model: this.graph,
-      gridSize: 1,
+      gridSize: 25,
       defaultLink: new joint.shapes.lunchBadger.MainLink({
 
       }),
@@ -73,11 +73,15 @@ export default class Paper {
       return;
     }
 
+    /**
+     * TODO: canvasHeight should expand when element is close to bottom border
+     */
+
     return {
-      x: fromLeft,
+      x: fromLeft + 0.1 * quadrantWidth,
       y: 0,
-      height: canvasHeight,
-      width: quadrantWidth
+      height: 50 * canvasHeight,
+      width: 0.8 * quadrantWidth
     }
   }
 }
