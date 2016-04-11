@@ -23,7 +23,7 @@ class Public extends BaseStore {
           Publics.push(action.api);
           this.emitChange();
           break;
-        case 'UpdateApi':
+        case 'UpdateAPI':
           this.updateEntity(action.id, action.data);
           this.emitChange();
           break;
