@@ -8,7 +8,8 @@ export default jointEntity.extend({
     outPorts: ['out'],
     inPorts: [],
     attrs: {
-      '.label': {text: 'Memory'}
+      '.label': {text: 'Memory'},
+      '.outPorts circle': {group: 'datasource', magnet: 'active'}
     }
   }, jointEntity.prototype.defaults)
 });
