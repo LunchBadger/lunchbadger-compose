@@ -9,7 +9,9 @@ import jointModel from './Model';
 import jointMongo from './Mongo';
 import jointOracle from './Oracle';
 import jointPublicEndpoint from './PublicEndpoint';
+import jointPublicEndpointView from './PublicEndpointView';
 import jointAPI from './API';
+import jointAPIView from './APIView';
 import jointSalesforce from './Salesforce';
 import jointSQL from './SQL';
 
@@ -19,9 +21,9 @@ joint.shapes.lunchBadger = {
   PrivateEndpoint: jointPrivateEndpoint,
   PrivateEndpointView: jointEntityView,
   PublicEndpoint: jointPublicEndpoint,
-  PublicEndpointView: jointEntityView,
+  PublicEndpointView: jointPublicEndpointView,
   API: jointAPI,
-  APIView: jointEntityView,
+  APIView: jointAPIView,
   Gateway: jointGateway,
   GatewayView: jointGatewayView,
   Memory: jointMemory,
