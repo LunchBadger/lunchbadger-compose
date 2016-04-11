@@ -7,7 +7,6 @@ const jointPublicEndpointViewInterface = {
     var modelsBehind = _.filter(this.model.graph.findModelsFromPoint({x, y}), (model) => {
       return model.id !== this.model.id }
     );
-    console.log(modelsBehind);
     if (modelsBehind[0].get('type') === 'lunchBadger.API') {
       modelsBehind[0].addEndpoint(this.model);
       this.model.remove();
