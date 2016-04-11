@@ -77,7 +77,7 @@ export default class Paper {
     return {
       x: fromLeft + 0.1 * quadrantWidth,
       y: 0,
-      height: 50 * canvasHeight,
+      height: canvasHeight,
       width: 0.8 * quadrantWidth
     }
   }
