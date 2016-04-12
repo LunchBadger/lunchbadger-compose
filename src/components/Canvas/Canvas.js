@@ -71,8 +71,8 @@ export default class Canvas extends Component {
       <section className="canvas">
         <div className={canvasWrapperClass} ref="canvasWrapper">
           <div className="canvas__legend">
-            <div className="canvas__label canvas__label--left">Consumers</div>
-            <div className="canvas__label canvas__label--right">Producers</div>
+            <div className="canvas__label canvas__label--left">Producers</div>
+            <div className="canvas__label canvas__label--right">Consumers</div>
           </div>
 
           <Quadrants className="canvas__container"
