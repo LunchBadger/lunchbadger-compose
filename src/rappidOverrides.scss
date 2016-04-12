@@ -1,0 +1,7 @@
+[magnet=true][type=input]:not(.element) {
+  cursor: move;
+
+  &:hover {
+    opacity: 1;
+  }
+}
