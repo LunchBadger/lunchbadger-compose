@@ -5,6 +5,7 @@ export default jointEntity.extend({
   defaults: joint.util.deepSupplement({
     type: 'lunchBadger.Mongo',
     icon: '&#xf1c0',
+    name: 'Mongo',
     outPorts: ['out'],
     inPorts: [],
     attrs: {

@@ -11,11 +11,12 @@ export default jointEntity.extend({
   defaults: joint.util.deepSupplement({
     type: 'lunchBadger.Gateway',
     icon: '&#xf0c2',
+    name: 'Gateway',
     outPorts: ['out', 'out2'],
     inPorts: ['in', 'in2'],
     pipelines: ['pipeline 1', 'pipeline 2'],
-    proxyByInput: [],
-    proxyByOutput: [],
+    proxiedByModel: [],
+    proxiedByEndpoint: [],
     attrs: {
       '.label': {text: 'Gateway'},
       '.pipeline-label': {fill: '#000000'},
@@ -128,25 +129,49 @@ export default jointEntity.extend({
     });
   },
 
-  addInputProxy(inPort) {
-    const proxyByInput = this.get('proxyByInput');
+  addReverseInputProxy(outPort) {
+    const portKey = _.findIndex(this.get('outPorts'), (port) => port === outPort);
 
-    proxyByInput.push(inPort);
-    this.set('proxyByInput', proxyByInput);
+    if (portKey > -1) {
+      this.addInputProxy(this.get('inPorts')[portKey]);
+    }
   },
 
-  addPublicEndpointByConnectingModel: function (target) {
-    const proxyByInput = this.get('proxyByInput');
+  addInputProxy(inPort) {
+    this.populateModelProxy(inPort);
+    this.populateEndpointProxy(inPort);
+  },
+
+  populateModelProxy(inPort) {
+    const proxyByInput = this.get('proxiedByModel');
+
+    proxyByInput.push(inPort);
+    this.set('proxiedByModel', proxyByInput);
+  },
+
+  populateEndpointProxy(inPort) {
+    const proxyByInput = this.get('proxiedByEndpoint');
+
+    proxyByInput.push(inPort);
+    this.set('proxiedByEndpoint', proxyByInput);
+  },
+
+  addProxiedEndpoint(target, type, attrs) {
+    if (type !== 'model' && type !== 'endpoint') {
+      return;
+    }
+
+    const proxiedPorts = type === 'model' ? this.get('proxiedByModel') : this.get('proxiedByEndpoint');
     const targetLinks = this.getTargetLinks(target);
 
     if (targetLinks.length > 0) {
       const targetPortKey = _.findIndex(this.get('inPorts'), (port) => port === target.port);
 
-      if (targetPortKey < 0 || proxyByInput.indexOf(target.port) > -1) {
+      if (targetPortKey < 0 || proxiedPorts.indexOf(target.port) > -1) {
         return;
       }
 
-      addPublicEndpoint();
+      addPublicEndpoint(attrs);
 
       const recentlyAddedElement = this.graph.getLastCell();
       const link = new joint.shapes.lunchBadger.MainLink({
@@ -154,9 +179,26 @@ export default jointEntity.extend({
         target: {id: recentlyAddedElement.id, port: recentlyAddedElement.get('inPorts')[0]}
       });
 
-      this.addInputProxy(target.port);
       this.graph.addCell(link);
+
+      if (type === 'model') {
+        this.populateModelProxy(target.port);
+      } else {
+        this.populateEndpointProxy(target.port);
+      }
     }
+  },
+
+  addPublicEndpointByConnectingModel: function (target) {
+    this.addProxiedEndpoint(target, 'model', {
+      name: 'Public Model Endpoint'
+    });
+  },
+
+  addPublicModelEndpointByConnectingPrivateEndpoint: function (target) {
+    this.addProxiedEndpoint(target, 'endpoint', {
+      name: 'Public Endpoint'
+    });
   }
 
 });

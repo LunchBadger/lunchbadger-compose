@@ -17,7 +17,9 @@ class PublicEndpoint extends Component {
     const {x, y} = this.props.position;
     const {width, height} = this.props.size;
 
-    this.element = new joint.shapes.lunchBadger.PublicEndpoint();
+    this.element = new joint.shapes.lunchBadger.PublicEndpoint({
+      name: this.props.entity.name
+    });
 
     this.props.paper.graph.addCell(
       this.element.set('group', publicGroupName)

@@ -31,7 +31,7 @@ export default class Paper {
 
     PaperEvents.paper = this.paper;
     PaperEvents.addEvent('cell:pointerup', this._removeEmptyLinks.bind(this));
-    PaperEvents.addEvent('cell:pointerup', this._reverseProxyPrivateEndpointWithGateway.bind(this));
+    PaperEvents.addEvent('cell:pointerup', this._reverseProxyThroughGateway.bind(this));
   }
 
   render() {
@@ -69,20 +69,30 @@ export default class Paper {
     }
   }
 
-  _reverseProxyPrivateEndpointWithGateway(elementView) {
+  _reverseProxyThroughGateway(elementView) {
     const elementModel = elementView.model;
 
     if (elementModel && elementModel.get('type') === 'lunchBadger.MainLink') {
       const targetModel = elementModel.getTargetElement();
       const sourceModel = elementModel.getSourceElement();
       const target = elementModel.get('target');
+      const source = elementModel.get('source');
 
-      if (!targetModel || !sourceModel || targetModel.get('type') !== 'lunchBadger.Gateway') {
+      if (!targetModel || !sourceModel ||
+        (targetModel.get('type') !== 'lunchBadger.Gateway' && sourceModel.get('type') !== 'lunchBadger.Gateway')) {
+        return;
+      }
+
+      if (sourceModel.get('type') === 'lunchBadger.Gateway') {
+        sourceModel.addReverseInputProxy(source.port);
+
         return;
       }
 
       if (sourceModel.get('type') === 'lunchBadger.Model') {
         targetModel.addPublicEndpointByConnectingModel(target);
+      } else if (sourceModel.get('type') === 'lunchBadger.PrivateEndpoint') {
+        targetModel.addPublicModelEndpointByConnectingPrivateEndpoint(target);
       } else {
         targetModel.addInputProxy(target.port);
       }

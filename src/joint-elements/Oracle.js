@@ -5,6 +5,7 @@ export default jointEntity.extend({
   defaults: joint.util.deepSupplement({
     type: 'lunchBadger.Oracle',
     icon: '&#xf1c0',
+    name: 'Oracle',
     outPorts: ['out'],
     inPorts: [],
     attrs: {

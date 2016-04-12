@@ -8,6 +8,7 @@ export default jointEntity.extend({
   defaults: joint.util.deepSupplement({
     type: 'lunchBadger.API',
     icon: '&#xf187',
+    name: 'API',
     endpointIcon: '&#xf0ac',
     outPorts: [],
     inPorts: ['in'],

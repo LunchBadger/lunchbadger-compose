@@ -5,6 +5,7 @@ export default jointEntity.extend({
   defaults: joint.util.deepSupplement({
     type: 'lunchBadger.Memory',
     icon: '&#xf1c0',
+    name: 'Memory',
     outPorts: ['out'],
     inPorts: [],
     attrs: {
