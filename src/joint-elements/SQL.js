@@ -5,6 +5,7 @@ export default jointEntity.extend({
   defaults: joint.util.deepSupplement({
     type: 'lunchBadger.SQL',
     icon: '&#xf1c0',
+    name: 'SQL',
     outPorts: ['out'],
     inPorts: [],
     attrs: {

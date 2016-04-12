@@ -16,11 +16,15 @@ const jointEntityViewInterface = {
   update: function () {
     // Call the `initialize()` of the parent.
     joint.shapes.devs.ModelView.prototype.update.apply(this, arguments);
+    this.renderLabel();
     this.renderPortsIcon();
   },
-  renderName: function () {
-    var nameHandler = this.$el.find('.iconlabel tspan');
-    iconHandler.html(this.model.attributes.name);
+  renderLabel: function () {
+    const attrs = this.model.get('attrs');
+    const name = this.model.get('name');
+    this.model.set(_.extend(attrs, {
+      '.label': {text: name}
+    }));
   },
   renderIcon: function () {
     var iconHandler = this.$el.find('.icon');

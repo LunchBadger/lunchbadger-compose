@@ -11,11 +11,11 @@ export default jointEntity.extend({
   defaults: joint.util.deepSupplement({
     type: 'lunchBadger.Gateway',
     icon: '&#xf0c2',
+    name: 'Gateway',
     outPorts: ['out', 'out2'],
     inPorts: ['in', 'in2'],
     pipelines: ['pipeline 1', 'pipeline 2'],
     proxyByInput: [],
-    proxyByOutput: [],
     attrs: {
       '.label': {text: 'Gateway'},
       '.pipeline-label': {fill: '#000000'},
@@ -146,7 +146,31 @@ export default jointEntity.extend({
         return;
       }
 
-      addPublicEndpoint();
+      addPublicEndpoint('Model Endpoint');
+
+      const recentlyAddedElement = this.graph.getLastCell();
+      const link = new joint.shapes.lunchBadger.MainLink({
+        source: {id: this.id, port: this.get('outPorts')[targetPortKey]},
+        target: {id: recentlyAddedElement.id, port: recentlyAddedElement.get('inPorts')[0]}
+      });
+
+      this.addInputProxy(target.port);
+      this.graph.addCell(link);
+    }
+  },
+
+  addPublicModelEndpointByConnectingPrivateEndpoint: function (target) {
+    const proxyByInput = this.get('proxyByInput');
+    const targetLinks = this.getTargetLinks(target);
+
+    if (targetLinks.length > 0) {
+      const targetPortKey = _.findIndex(this.get('inPorts'), (port) => port === target.port);
+
+      if (targetPortKey < 0 || proxyByInput.indexOf(target.port) > -1) {
+        return;
+      }
+
+      addPublicEndpoint('Public Endpoint');
 
       const recentlyAddedElement = this.graph.getLastCell();
       const link = new joint.shapes.lunchBadger.MainLink({
