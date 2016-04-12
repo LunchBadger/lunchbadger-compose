@@ -76,8 +76,16 @@ export default class Paper {
       const targetModel = elementModel.getTargetElement();
       const sourceModel = elementModel.getSourceElement();
       const target = elementModel.get('target');
+      const source = elementModel.get('source');
 
-      if (!targetModel || !sourceModel || targetModel.get('type') !== 'lunchBadger.Gateway') {
+      if (!targetModel || !sourceModel ||
+        (targetModel.get('type') !== 'lunchBadger.Gateway' && sourceModel.get('type') !== 'lunchBadger.Gateway')) {
+        return;
+      }
+
+      if (sourceModel.get('type') === 'lunchBadger.Gateway') {
+        sourceModel.addReverseInputProxy(source.port);
+
         return;
       }
 

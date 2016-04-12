@@ -129,6 +129,14 @@ export default jointEntity.extend({
     });
   },
 
+  addReverseInputProxy(outPort) {
+    const portKey = _.findIndex(this.get('outPorts'), (port) => port === outPort);
+
+    if (portKey > -1) {
+      this.addInputProxy(this.get('inPorts')[portKey]);
+    }
+  },
+
   addInputProxy(inPort) {
     this.populateModelProxy(inPort);
     this.populateEndpointProxy(inPort);
