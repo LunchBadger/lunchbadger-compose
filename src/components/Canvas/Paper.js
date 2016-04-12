@@ -24,7 +24,7 @@ export default class Paper {
       restrictTranslate: this._restrictElementTranslations.bind(this),
       validateConnection: this._validateConnections.bind(this),
       validateMagnet: (cellView, magnet) => {
-        return magnet.getAttribute('magnet') !== 'passive';
+        return magnet.getAttribute('type') !== 'input';
       }
     });
 
@@ -71,7 +71,30 @@ export default class Paper {
       return false;
     }
 
+    if (
+      magnetStart &&
+      magnetEnd &&
+      this._checkExistingConnection(cellViewStart, cellViewEnd, magnetStart, magnetEnd)
+    ) {
+      return false;
+    }
+
     return magnetStart && magnetEnd && magnetStart.getAttribute('group') === magnetEnd.getAttribute('group');
+  }
+
+  _checkExistingConnection(fromElement, toElement, fromPort, toPort) {
+    const sourceLinks = this.graph.getConnectedLinks(fromElement.model);
+
+    return sourceLinks.some((link) => {
+      const target = link.get('target');
+      const source = link.get('source');
+
+      return !!(
+        target.id === toElement.model.id &&
+        target.port === toPort.getAttribute('port') &&
+        source.port === fromPort.getAttribute('port')
+      );
+    });
   }
 
   _removeEmptyLinks() {
