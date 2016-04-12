@@ -1,6 +1,7 @@
 import joint from 'rappid';
 import jointEntity from './Entity';
 import _ from 'lodash';
+import addPublicEndpoint from 'actions/PublicEndpoint/add';
 
 export default jointEntity.extend({
   markup: '<g class="rotatable"><g class="scalable"><rect class="body"/></g><text class="icon fa"/><text class="label"/><g class="pipelines"/><g class="inPorts"/><g class="outPorts"/></g>',
@@ -13,6 +14,8 @@ export default jointEntity.extend({
     outPorts: ['out', 'out2'],
     inPorts: ['in', 'in2'],
     pipelines: ['pipeline 1', 'pipeline 2'],
+    proxyByInput: [],
+    proxyByOutput: [],
     attrs: {
       '.label': {text: 'Gateway'},
       '.pipeline-label': {fill: '#000000'},
@@ -115,6 +118,45 @@ export default jointEntity.extend({
       attrs[portSelector]['ref-dx'] = 0;
     }
     return attrs;
+  },
+
+  getTargetLinks: function (target) {
+    const links = this.graph.getConnectedLinks(this);
+
+    return _.filter(links, (link) => {
+      return link.get('target').port === target.port;
+    });
+  },
+
+  addInputProxy(inPort) {
+    const proxyByInput = this.get('proxyByInput');
+
+    proxyByInput.push(inPort);
+    this.set('proxyByInput', proxyByInput);
+  },
+
+  addPublicEndpointByConnectingModel: function (target) {
+    const proxyByInput = this.get('proxyByInput');
+    const targetLinks = this.getTargetLinks(target);
+
+    if (targetLinks.length > 0) {
+      const targetPortKey = _.findIndex(this.get('inPorts'), (port) => port === target.port);
+
+      if (targetPortKey < 0 || proxyByInput.indexOf(target.port) > -1) {
+        return;
+      }
+
+      addPublicEndpoint();
+
+      const recentlyAddedElement = this.graph.getLastCell();
+      const link = new joint.shapes.lunchBadger.MainLink({
+        source: {id: this.id, port: this.get('outPorts')[targetPortKey]},
+        target: {id: recentlyAddedElement.id, port: recentlyAddedElement.get('inPorts')[0]}
+      });
+
+      this.addInputProxy(target.port);
+      this.graph.addCell(link);
+    }
   }
 
 });
