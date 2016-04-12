@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import joint from 'rappid';
 import AppState from 'stores/AppState';
+import PaperEvents from './PaperEvents';
 
 export default class Paper {
   /**
@@ -28,7 +29,9 @@ export default class Paper {
       }
     });
 
-    this.paper.on('cell:pointerup', this._removeEmptyLinks.bind(this));
+    PaperEvents.paper = this.paper;
+    PaperEvents.addEvent('cell:pointerup', this._removeEmptyLinks.bind(this));
+    PaperEvents.addEvent('cell:pointerup', this._reverseProxyPrivateEndpointWithGateway.bind(this));
   }
 
   render() {
@@ -66,6 +69,26 @@ export default class Paper {
     }
   }
 
+  _reverseProxyPrivateEndpointWithGateway(elementView) {
+    const elementModel = elementView.model;
+
+    if (elementModel && elementModel.get('type') === 'lunchBadger.MainLink') {
+      const targetModel = elementModel.getTargetElement();
+      const sourceModel = elementModel.getSourceElement();
+      const target = elementModel.get('target');
+
+      if (!targetModel || !sourceModel || targetModel.get('type') !== 'lunchBadger.Gateway') {
+        return;
+      }
+
+      if (sourceModel.get('type') === 'lunchBadger.Model') {
+        targetModel.addPublicEndpointByConnectingModel(target);
+      } else {
+        targetModel.addInputProxy(target.port);
+      }
+    }
+  }
+
   _validateConnections(cellViewStart, magnetStart, cellViewEnd, magnetEnd) {
     if (cellViewStart === cellViewEnd) {
       return false;
@@ -79,7 +102,12 @@ export default class Paper {
       return false;
     }
 
-    return magnetStart && magnetEnd && magnetStart.getAttribute('group') === magnetEnd.getAttribute('group');
+    return (
+      magnetStart &&
+      magnetEnd &&
+      magnetStart.getAttribute('group') === magnetEnd.getAttribute('group') &&
+      magnetEnd.getAttribute('type') === 'input'
+    );
   }
 
   _checkExistingConnection(fromElement, toElement, fromPort, toPort) {
