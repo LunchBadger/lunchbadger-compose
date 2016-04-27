@@ -105,10 +105,9 @@ export default class Pipeline extends Component {
         <Port key={`port-${port.portType}-${port.id}`}
               ref={`port-${port.portType}`}
               paper={this.props.paper}
-              way={port.portType}
-              elementId={this.props.entity.id}
-              middle={true}
-              scope={port.portGroup}/>
+              port={port}
+              elementId={`sub_${this.props.entity.id}`}
+              middle={true}/>
       );
     });
   }

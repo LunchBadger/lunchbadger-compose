@@ -6,9 +6,8 @@ import classNames from 'classnames';
 export default class Port extends Component {
   static propTypes = {
     elementId: PropTypes.string.isRequired,
-    way: PropTypes.oneOf(['in', 'out']).isRequired,
-    scope: PropTypes.string.isRequired,
     paper: PropTypes.object.isRequired,
+    port: PropTypes.object.isRequired,
     middle: PropTypes.bool,
     className: PropTypes.string
   };
@@ -45,29 +44,34 @@ export default class Port extends Component {
     };
 
     this.props.paper.makeSource(portDOM, {
-      endpoint: ['Dot', {radius: 5}],
-      allowLoopback: false
+      endpoint: ['Dot', {radius: 5}]
     }, endpointOptions);
 
     this.props.paper.makeTarget(portDOM, {
       endpoint: ['Dot', {radius: 5}],
-      allowLoopback: false,
-      deleteEndpointsOnDetach: true
+      deleteEndpointsOnDetach: false
     }, endpointOptions);
   }
 
+  componentWillUnmount() {
+    const node = findDOMNode(this.refs.port);
+
+    // this.props.paper.remove(node, false);
+  }
+
   render() {
+    const {port} = this.props;
     const portClass = classNames({
-      'canvas-element__port--out': this.props.way === 'out',
-      'canvas-element__port--in': this.props.way === 'in',
+      'canvas-element__port--out': port.way === 'out',
+      'canvas-element__port--in': port.way === 'in',
       'canvas-element__port': true,
       'port': true,
-      'port__middle': this.props.middle
+      'port__middle': port.middle
     });
 
     return (
-      <div ref="port" id={`port_${this.props.way}_${this.props.elementId}`}
-           className={`port-${this.props.way} ${portClass} ${this.props.className || ''}`}>
+      <div ref="port" id={`port_${port.way}_${this.props.elementId}`}
+           className={`port-${port.way} ${portClass} ${this.props.className || ''}`}>
         <div className="port__inside">
         </div>
       </div>

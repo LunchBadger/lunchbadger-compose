@@ -61,11 +61,10 @@ export default class PublicEndpoint extends Component {
       return (
         <Port key={`port-${port.portType}-${port.id}`}
               paper={this.props.paper}
-              way={port.portType}
+              port={port}
               middle={true}
               elementId={`sub_${this.props.entity.id}`}
-              ref={`port-${port.portType}`}
-              scope={port.portGroup}/>
+              ref={`port-${port.portType}`}/>
       );
     });
   }

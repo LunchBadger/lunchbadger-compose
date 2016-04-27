@@ -53,11 +53,11 @@ class Connection extends BaseStore {
   }
 
   getConnectionsForTarget(target) {
-    return this.search({toId: target});
+    return this.search({toId: this._formatPortId(target)});
   }
 
   getConnectionsForSource(source) {
-    return this.search({fromId: source});
+    return this.search({fromId: this._formatPortId(source)});
   }
 
   getLastConnection() {

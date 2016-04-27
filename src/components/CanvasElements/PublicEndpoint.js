@@ -53,11 +53,10 @@ class PublicEndpoint extends Component {
       return (
         <Port key={`port-${port.portType}-${port.id}`}
               paper={this.props.paper}
-              way={port.portType}
+              port={port}
               elementId={this.props.entity.id}
               className={`port-${this.props.entity.constructor.type} port-${port.portGroup}`}
-              ref={`port-${port.portType}`}
-              scope={port.portGroup}/>
+              ref={`port-${port.portType}`}/>
       );
     });
   }
